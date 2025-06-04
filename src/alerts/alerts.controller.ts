@@ -1,4 +1,13 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
+import { AlertsService } from './alerts.service';
+import { CreateAlertDto } from './dto/create-alert.dto';
 
 @Controller('alerts')
-export class AlertsController {}
+export class AlertsController {
+  constructor(private readonly alertsService: AlertsService) {}
+
+  @Post()
+  create(@Body() createAlertDto: CreateAlertDto) {
+    return this.alertsService.create(createAlertDto);
+  }
+}
